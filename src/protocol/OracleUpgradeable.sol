@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-only
+//@follow-up solidity versions mismatch
 pragma solidity 0.8.20;
 
 import { ITSwapPool } from "../interfaces/ITSwapPool.sol";
@@ -8,6 +9,7 @@ import { Initializable } from "@openzeppelin/contracts-upgradeable/proxy/utils/I
 contract OracleUpgradeable is Initializable {
     address private s_poolFactory;
 
+    //@audit info-need to check for address(0)
     function __Oracle_init(address poolFactoryAddress) internal onlyInitializing {
         __Oracle_init_unchained(poolFactoryAddress);
     }
