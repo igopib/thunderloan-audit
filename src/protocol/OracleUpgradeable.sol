@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: AGPL-3.0-only
-//@follow-up solidity versions mismatch
 pragma solidity 0.8.20;
 
 import { ITSwapPool } from "../interfaces/ITSwapPool.sol";
