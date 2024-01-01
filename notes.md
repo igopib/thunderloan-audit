@@ -12,6 +12,11 @@ Thunder loan gives out flash loans-
 ### Interface
 
 IPoolFactory - clear
-IFlashLoanReceiver -
+IFlashLoanReceiver - clear
 IThunderLoan - clear - L
 ITSwapPool - clear
+
+### Protocol
+
+OracleUpgradable - checked
+AssetToken - needs @follow up

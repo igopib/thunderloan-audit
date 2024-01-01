@@ -73,10 +73,13 @@ contract AssetToken is ERC20 {
         _burn(account, amount);
     }
 
+    //follow-up wrird erc20 with usdc
     function transferUnderlyingTo(address to, uint256 amount) external onlyThunderLoan {
         i_underlying.safeTransfer(to, amount);
     }
 
+    //@follow-up INVARIANT
+    //@audit gas-too many storage reads for s_exchangeRate, consider reading it from memory
     function updateExchangeRate(uint256 fee) external onlyThunderLoan {
         // 1. Get the current exchange rate
         // 2. How big the fee is should be divided by the total supply
