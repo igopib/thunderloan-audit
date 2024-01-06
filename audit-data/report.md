@@ -1,3 +1,92 @@
+---
+title: ThunderLoan Audit Report
+author: Gopinho
+date: Jan 06, 2024
+header-includes:
+  - \usepackage{titling}
+  - \usepackage{graphicx}
+---
+
+\begin{titlepage}
+\centering
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{logo.pdf}
+\end{figure}
+\vspace{1cm}
+{\Large Version 1.0\par}
+\vspace{2cm}
+{\Large\itshape profileos.vercel.app\par}
+\vfill
+{\large \today\par}
+\end{titlepage}
+
+\maketitle
+
+Prepared by: [Gurpreet](https://profileos.vercel.app)
+Lead Researcher:
+
+- Gurpreet
+
+# Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [Protocol Summary](#protocol-summary)
+- [Disclaimer](#disclaimer)
+- [Risk Classification](#risk-classification)
+- [Audit Details](#audit-details)
+  - [Scope](#scope)
+  - [Roles](#roles)
+- [Executive Summary](#executive-summary)
+  - [Issues found](#issues-found)
+- [Findings](#findings)
+- [High](#high)
+- [Medium](#medium)
+- [Low](#low)
+- [Informational](#informational)
+- [Gas](#gas)
+
+# Protocol Summary
+
+Protocol let's users deposit selected tokens as pools and let's other users borrow them as flash loans for some fee.
+
+# Disclaimer
+
+Gurpreet makes all effort to find as many vulnerabilities in the code in the given time period, but holds no responsibilities for the findings provided in this document. A security audit by the team is not an endorsement of the underlying business or product. The audit was time-boxed and the review of the code was solely on the security aspects of the Solidity implementation of the contracts.
+
+# Risk Classification
+
+|            |        | Impact |        |     |
+| ---------- | ------ | ------ | ------ | --- |
+|            |        | High   | Medium | Low |
+|            | High   | H      | H/M    | M   |
+| Likelihood | Medium | H/M    | M      | M/L |
+|            | Low    | M      | M/L    | L   |
+
+We use the [CodeHawks](https://docs.codehawks.com/hawks-auditors/how-to-evaluate-a-finding-severity) severity matrix to determine severity. See the documentation for more details.
+
+# Audit Details
+
+## Scope
+
+## Roles
+
+# Executive Summary
+
+## Issues found
+
+| Severity | Number of issues |
+| -------- | ---------------- |
+| High     | 3                |
+| Medium   | 1                |
+| Info     | 0                |
+| Gas      | 0                |
+| Total    | 4                |
+
+# Findings
+
+## High
+
 ### [H-1] Incorrect and unnecessary rewards calculation in `ThunderLoan::deposit` function using `AssetToken::updateExchangeRate`, which cases protocol to think it received more fee than it should and blocks redemptions.
 
 **Description:** `exchangeRate` is responsible for calculating the exchange between assetTokens and underlying token assets. It decides in a way the amount of fee to give to liquidity providers.
@@ -270,7 +359,9 @@ import { ThunderLoanUpgraded } from "../../src/upgradedProtocol/ThunderLoanUpgra
 +    uint256 public constant FEE_PRECISION = 1e18;
 ```
 
-### <a id='M-01'></a>[M-01] Attacker can minimize `ThunderLoan::flashloan` fee via price oracle manipulation
+## Medium
+
+### [M-1] Attacker can minimize `ThunderLoan::flashloan` fee via price oracle manipulation
 
 **Description:**
 
