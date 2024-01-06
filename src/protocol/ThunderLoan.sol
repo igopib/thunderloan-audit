@@ -157,7 +157,9 @@ contract ThunderLoan is Initializable, OwnableUpgradeable, UUPSUpgradeable, Orac
         assetToken.mint(msg.sender, mintAmount);
 
         //@audit-high the fee should not be updated while depositing, as it manipulates the rewards in incorrect ways.
+        // q why are we calculating fee here ?
         uint256 calculatedFee = getCalculatedFee(token, amount);
+        // q why is exchange rate being updated here ?
         assetToken.updateExchangeRate(calculatedFee);
         token.safeTransferFrom(msg.sender, address(assetToken), amount);
     }
@@ -241,6 +243,7 @@ contract ThunderLoan is Initializable, OwnableUpgradeable, UUPSUpgradeable, Orac
     }
 
     // e helper function to repay flash loans.
+    //@audit-low 
     function repay(IERC20 token, uint256 amount) public {
         if (!s_currentlyFlashLoaning[token]) {
             revert ThunderLoan__NotCurrentlyFlashLoaning();
